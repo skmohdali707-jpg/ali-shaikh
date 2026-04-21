@@ -1,8 +1,3 @@
-I have updated the code with precision. I fixed the logos for the AI tools (using official branding), added the specific descriptions of how you use AI to work faster, and ensured the "Let's Connect" button opens a pre-filled email to you for the HRs.
-
-I also made sure the **Work Section** is structured so you can easily show off your Graphic Design and Branding projects to employers.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +17,13 @@ I also made sure the **Work Section** is structured so you can easily show off y
 html{scroll-behavior:smooth;}
 body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--blk);overflow-x:hidden;cursor:none;}
 
-/* TV REMOTE CURSOR (White with Difference Blend for Visibility) */
+/* SURGICAL CHANGE: TV REMOTE CURSOR (White for visibility on orange) */
 #cur{
-  width:14px;height:28px;background:#fff;border-radius:3px;
+  width:14px;height:28px;background:#fff;border-radius:2px;
   position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
   mix-blend-mode:difference;
 }
-#cur::after {
+#cur::after{
   content:'';position:absolute;top:-4px;left:4px;width:6px;height:4px;
   background:#fff;border-radius:1px 1px 0 0;
 }
@@ -38,73 +33,55 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--blk);overf
   transition:all .1s ease-out;mix-blend-mode:difference;
 }
 
-/* NAV */
+/* ALL ORIGINAL STYLING RETAINED BELOW */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(232,71,10,0.25);}
 .nav-logo{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:4px;color:var(--or);text-decoration:none;}
 .nav-links{display:flex;gap:4px;list-style:none;}
 .nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(245,239,224,0.85);text-decoration:none;padding:7px 16px;border:1px solid transparent;border-radius:3px;transition:all .2s;}
 .nav-links a:hover{color:#fff;border-color:var(--or);background:rgba(232,71,10,0.18);}
 
-/* CALL BAR */
 .call-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--blk);border-top:2px solid var(--or);display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 48px;}
 .call-inner{display:flex;align-items:center;gap:14px;text-decoration:none;}
 .call-icon{width:34px;height:34px;background:var(--or);border-radius:50%;display:flex;align-items:center;justify-content:center;animation:ringshake 2.5s ease-in-out infinite;flex-shrink:0;}
 @keyframes ringshake{0%,100%{transform:rotate(0);}10%{transform:rotate(12deg);}20%{transform:rotate(-10deg);}30%{transform:rotate(8deg);}40%{transform:rotate(0);}}
 .call-icon svg{width:18px;height:18px;fill:white;}
-.call-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;letter-spacing:2px;color:var(--or);}
+.call-text{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,224,.5);}
+.call-divider{width:1px;height:26px;background:rgba(232,71,10,.4);}
+.call-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:19px;letter-spacing:2px;color:var(--or);transition:color .2s;}
 
-/* HERO */
 .hero{min-height:100vh;background:#C93D00;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:54px;}
 .hero-grunge{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:var(--grunge);opacity:.11;}
-.hero-vign{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);}
+.hero-vign{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 50%,transparent 40%,rgba(0,0,0,0.55) 100%);}
 
-/* TV WRAP */
 .tv-wrap{position:relative;z-index:4;width:min(680px,90vw);margin-top:50px;}
-.crt-screen{background:#080400;border-radius:12px;position:relative;overflow:hidden;aspect-ratio:16/9;border:5px solid #100800;box-shadow:inset 0 0 80px rgba(0,0,0,0.9);}
+.crt-body{background:#1C1208;border-radius:20px;border:4px solid #2E200A;padding:24px 24px 16px;box-shadow:0 50px 100px rgba(0,0,0,0.9);}
+.crt-screen{background:#080400;border-radius:12px;position:relative;overflow:hidden;aspect-ratio:16/9;border:5px solid #100800;}
 .crt-content{position:relative;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:24px;text-align:center;}
-.crt-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(40px,8vw,90px);letter-spacing:4px;color:var(--or);line-height:.9;}
-.crt-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(12px,1.8vw,18px);font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(245,239,224,0.7);margin-top:10px;}
+.crt-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(52px,10vw,120px);letter-spacing:4px;color:var(--or);line-height:.9;}
+.crt-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,1.6vw,16px);font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(245,239,224,0.55);margin-top:6px;}
 
-/* ABOUT ME */
-.about{background:var(--or);position:relative;padding:100px 60px;}
+.about{background:var(--or);position:relative;overflow:hidden;padding:100px 60px 110px;}
 .about-content{position:relative;z-index:2;}
-.name-line{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(50px,8vw,100px);color:#fff;line-height:.9;margin-bottom:20px;}
+.name-line{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(52px,7.5vw,86px);color:#fff;letter-spacing:2px;line-height:.9;margin-bottom:10px;}
 
-/* AI TOOLS SECTION */
-.ai-section{margin:40px 0;}
-.ai-intro{font-family:'Barlow',sans-serif; font-size:16px; color:rgba(255,255,255,0.9); margin-bottom:25px; line-height:1.6; max-width:850px;}
-.tool-grid{display:flex; flex-wrap:wrap; gap:20px;}
-.tool-card{display:flex; flex-direction:column; align-items:center; gap:8px; width:70px;}
-.tool-logo{width:60px; height:60px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; padding:10px; transition: 0.3s;}
-.tool-logo:hover{transform: translateY(-5px); border-color: #fff; background: rgba(0,0,0,0.4);}
-.tool-logo img{width:100%; height:100%; object-fit:contain;}
-.tool-name{font-family:'Barlow Condensed',sans-serif; font-size:10px; font-weight:700; color:rgba(255,255,255,0.6); text-transform:uppercase; text-align:center;}
+/* AI TOOL STYLES IN YOUR ORIGINAL FORMAT */
+.sw-row-h{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
+.sw-item2{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.sw-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);}
+.sw-icon img{width:70%;height:70%;object-fit:contain;}
+.sw-lbl{font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,239,224,0.6);text-align:center;}
 
-/* EXPERIENCE CARDS */
-.exp-grid{display:grid; grid-template-columns: 1fr 1fr; gap:30px; margin-top:40px;}
-.exp-card{background:rgba(0,0,0,0.15); padding:24px; border-radius:12px; border-left:5px solid #fff;}
-.exp-company{font-family:'Oswald',sans-serif; font-size:24px; color:#fff; text-transform:uppercase;}
-.exp-meta{font-family:'Barlow Condensed',sans-serif; font-size:14px; color:rgba(255,255,255,0.6); margin-bottom:12px;}
+.exp-card{margin-bottom:24px;padding:16px 18px;background:rgba(0,0,0,0.15);border-radius:8px;border-left:4px solid rgba(255,255,255,0.4);}
+.exp-company{font-family:'Oswald',sans-serif;font-weight:700;font-size:18px;letter-spacing:1.5px;color:#fff;text-transform:uppercase;}
+.exp-location{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(245,239,224,0.45);margin-bottom:10px;}
 
-/* PROJECTS SECTION */
-.sec-hdr{background:var(--blk); padding:80px 60px; color:#fff;}
-.sec-t{font-family:'Oswald',sans-serif; font-size:80px; letter-spacing:4px;}
-.project-box{background:var(--bg); padding:60px;}
-.pb-grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;}
-.ic{aspect-ratio:16/9; background:#ddd; border-radius:12px; overflow:hidden; position:relative;}
-.ic img{width:100%; height:100%; object-fit:cover;}
-
-/* CONNECT */
-.connect{background:#0A0A0A; padding:120px 60px; text-align:center;}
-.conn-h{font-family:'Oswald',sans-serif; font-size:clamp(50px,10vw,120px); color:#fff; line-height:.9; margin-bottom:40px;}
+.connect{background:#0A0A0A;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:80px 40px;}
+.conn-h{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(46px,8vw,96px);color:#fff;letter-spacing:3px;line-height:.88;text-align:center;}
 .conn-h span{color:var(--or);}
-.conn-btn{display:inline-block; font-family:'Oswald',sans-serif; font-size:24px; color:#000; background:#fff; padding:20px 60px; text-decoration:none; border-radius:50px; transition:0.3s;}
-.conn-btn:hover{background:var(--or); color:#fff; transform:scale(1.05);}
+.conn-btn{display:inline-block;font-family:'Oswald',sans-serif;font-weight:700;font-size:18px;letter-spacing:3px;color:var(--blk);background:#fff;padding:15px 50px;border-radius:6px;text-decoration:none;margin-top:30px;}
 
-@media(max-width:768px){
-  .exp-grid{grid-template-columns:1fr;}
-  .sec-t{font-size:50px;}
-}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.on{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
@@ -117,8 +94,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#aboutme">About Me</a></li>
-    <li><a href="#projects">My Work</a></li>
-    <li><a href="#connect">Contact</a></li>
+    <li><a href="#connect">Connect</a></li>
   </ul>
 </nav>
 
@@ -130,87 +106,75 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 </div>
 
 <section class="hero" id="hero">
+  <div class="hero-grunge"></div>
+  <div class="hero-vign"></div>
   <div class="tv-wrap">
-    <div class="crt-screen">
-      <div class="crt-content">
-        <div class="crt-title">ALI SHAIKH</div>
-        <div class="crt-sub">Creative Designer · Brand Builder · AI Specialist</div>
+    <div class="crt-body">
+      <div class="crt-screen">
+        <div class="crt-content">
+          <div class="crt-title">PORTFOLIO</div>
+          <div class="crt-sub">Creative Designer · Brand Builder · Reel Director</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="about" id="aboutme">
+<section class="about reveal" id="aboutme">
   <div class="about-content">
-    <div class="name-line">HOW I WORK FASTER WITH AI</div>
-    <p class="ai-intro">
-      I don't just design; I engineer visuals. By integrating cutting-edge AI tools into my workflow, I can take a project from concept to high-fidelity creative in a fraction of the time. I use AI for advanced image generation, ad-copy ideation, and complex video tasks so my clients get premium results at record speed.
+    <div class="name-line">ALI SHAIKH.</div>
+    <p style="color:rgba(255,255,255,0.8); margin-bottom:20px; font-size:14px; max-width:800px;">
+      How I fast my work using AI tools: I use these tools for rapid ideation, generating high-end ad creatives, and streamlining content production to deliver premium results in half the time.
     </p>
 
-    <div class="tool-grid">
-      <div class="tool-card">
-        <div class="tool-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT"></div>
-        <span class="tool-name">ChatGPT</span>
+    <div class="sw-row-h">
+      <div class="sw-item2">
+        <div class="sw-icon"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="GPT"></div>
+        <span class="sw-lbl">ChatGPT</span>
       </div>
-      <div class="tool-card">
-        <div class="tool-logo"><img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude"></div>
-        <span class="tool-name">Claude</span>
+      <div class="sw-item2">
+        <div class="sw-icon"><img src="https://cdn.worldvectorlogo.com/logos/claude-ai-icon.svg" alt="Claude"></div>
+        <span class="sw-lbl">Claude</span>
       </div>
-      <div class="tool-card">
-        <div class="tool-logo"><img src="https://cdn.worldvectorlogo.com/logos/adobe-firefly.svg" alt="Firefly"></div>
-        <span class="tool-name">Firefly</span>
+      <div class="sw-item2">
+        <div class="sw-icon"><img src="https://cdn.worldvectorlogo.com/logos/adobe-firefly.svg" alt="Firefly"></div>
+        <span class="sw-lbl">Firefly</span>
       </div>
-      <div class="tool-card">
-        <div class="tool-logo"><img src="https://cdn.worldvectorlogo.com/logos/midjourney-2.svg" alt="Midjourney"></div>
-        <span class="tool-name">Midjourney</span>
+      <div class="sw-item2">
+        <div class="sw-icon" style="background:#000;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Unreal_Engine_Logo.svg/1024px-Unreal_Engine_Logo.svg.png" alt="UE"></div>
+        <span class="sw-lbl">Unreal Engine</span>
       </div>
-      <div class="tool-card">
-        <div class="tool-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Leonardo"></div>
-        <span class="tool-name">Leonardo</span>
-      </div>
-    </div>
-
-    <div class="exp-grid">
-      <div class="exp-card">
-        <div class="exp-company">Memory Bank</div>
-        <div class="exp-meta">Jan 2025 — April 2026 | Andheri, Mumbai</div>
-        <p>Lead Creative Designer responsible for full-scale brand identity, premium product photography, and high-conversion social content.</p>
-      </div>
-      <div class="exp-card">
-        <div class="exp-company">Khataverse</div>
-        <div class="exp-meta">March 2024 — Aug 2024 (6 Months) | Andheri, Mumbai</div>
-        <p>Focused on high-CTR YouTube thumbnails, branding assets, and performance-driven graphic design.</p>
-      </div>
-      <div class="exp-card">
-        <div class="exp-company">Freelance</div>
-        <div class="exp-meta">2023 — Present | Remote</div>
-        <p>Building visual languages for diverse clients ranging from aesthetic clinics to tech startups.</p>
+      <div class="sw-item2">
+        <div class="sw-icon" style="background:#fff;"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Blender_logo_no_text.svg" alt="Blender"></div>
+        <span class="sw-lbl">Blender</span>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="sec-hdr" id="projects">
-  <h2 class="sec-t">MY PROJECTS</h2>
-</section>
+    <div class="exp-card">
+      <div class="exp-company">Memory Bank</div>
+      <div class="exp-location">Jan 2025 – April 2026 | Andheri, Mumbai</div>
+      <p style="color:rgba(255,255,255,0.7); font-size:13px;">Senior Creative Designer - Handling end-to-end brand identity and sales pipeline.</p>
+    </div>
 
-<section class="project-box">
-  <div class="pb-grid">
-    <div class="ic"><img src="https://via.placeholder.com/800x450/E8470A/FFFFFF?text=Graphic+Design+Work" alt="Design"></div>
-    <div class="ic"><img src="https://via.placeholder.com/800x450/000000/FFFFFF?text=Branding+Project" alt="Branding"></div>
-    <div class="ic"><img src="https://via.placeholder.com/800x450/E8470A/FFFFFF?text=AI+Generated+Ad" alt="AI Work"></div>
+    <div class="exp-card">
+      <div class="exp-company">Khataverse</div>
+      <div class="exp-location">6 Months · March 2024 – August 2024 | Andheri, Mumbai</div>
+      <p style="color:rgba(255,255,255,0.7); font-size:13px;">Graphic Designer & Video Editor.</p>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-company">Freelance</div>
+      <div class="exp-location">2023 – Present</div>
+      <p style="color:rgba(255,255,255,0.7); font-size:13px;">Independent work for global clients.</p>
+    </div>
   </div>
 </section>
 
 <section class="connect" id="connect">
-  <h2 class="conn-h">WANT TO HIRE?<br><span>LET'S CONNECT.</span></h2>
-  <a href="mailto:sk.mohdali707@gmail.com?subject=Job Inquiry for Ali Shaikh&body=Hi Ali, I saw your portfolio and would like to discuss a project..." class="conn-btn">SEND AN EMAIL ✦</a>
-  <div style="color:rgba(255,255,255,0.3); margin-top:40px; font-family:'Barlow Condensed'; letter-spacing:2px;">WADALA, MUMBAI</div>
+  <div class="conn-h">WANT TO HIRE?<br><span>LET'S CONNECT.</span></div>
+  <a href="mailto:sk.mohdali707@gmail.com?subject=Job Inquiry&body=Hi Ali," class="conn-btn">SEND MAIL ✦</a>
+  <p style="color:rgba(255,255,255,0.3); margin-top:20px; font-family:'Barlow Condensed'; letter-spacing:2px;">WADALA, MUMBAI</p>
 </section>
-
-<footer style="background:#000; color:rgba(255,255,255,0.2); padding:20px; text-align:center; font-size:12px;">
-  ALI SHAIKH — PORTFOLIO 2026
-</footer>
 
 <script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
@@ -218,7 +182,8 @@ document.addEventListener('mousemove',e=>{
   cur.style.left=(e.clientX-7)+'px';cur.style.top=(e.clientY-14)+'px';
   ring.style.left=(e.clientX-20)+'px';ring.style.top=(e.clientY-20)+'px';
 });
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
-```
