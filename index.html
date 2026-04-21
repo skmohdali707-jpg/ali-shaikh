@@ -17,20 +17,52 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--blk);overflow-x:hidden;cursor:none;}
 
-/* TV REMOTE CURSOR — High contrast for visibility */
-#cur {
-  width: 24px; height: 40px;
-  background: #111;
-  border: 2px solid #fff;
-  border-radius: 4px;
-  position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-  display: flex; flex-direction: column; align-items: center; justify-content: space-around; padding: 4px 0;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+/* CUSTOM CURSOR — TV Remote style */
+#cur{
+  width:8px;height:22px;
+  background:#1A1A1A;
+  border-radius:4px 4px 3px 3px;
+  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  border:1.5px solid rgba(255,255,255,0.9);
+  box-shadow:0 0 8px rgba(255,255,255,0.5), inset 0 3px 0 rgba(255,255,255,0.3);
+  transform:rotate(0deg);
 }
-#cur::before { content: ''; width: 6px; height: 6px; background: red; border-radius: 50%; }
-#cur::after { content: ''; width: 10px; height: 2px; background: #555; }
+#cur::after{
+  content:'';
+  position:absolute;
+  top:4px;left:50%;transform:translateX(-50%);
+  width:3px;height:3px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 4px rgba(255,255,255,0.8);
+}
+#cur-ring{
+  width:40px;height:40px;
+  border:1.5px solid rgba(255,255,255,0.5);
+  border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
+  transition:all .12s ease;
+  border-top-color:rgba(255,255,255,0.9);
+}
 
-/* ── NAV ── */
+/* AVAILABLE FOR WORK badge */
+.avail-badge{
+  position:absolute;top:16px;left:0;right:0;z-index:10;
+  display:flex;justify-content:center;
+  padding:0 12px;
+}
+.avail-inner{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(10,10,10,0.75);
+  border:1px solid var(--or);
+  border-radius:30px;
+  padding:6px 16px;
+  backdrop-filter:blur(8px);
+  white-space:nowrap;
+  max-width:100%;
+}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,0.5);}50%{box-shadow:0 0 0 5px rgba(74,222,128,0);}}
+.avail-txt{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,224,0.9);}
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(10,10,10,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(232,71,10,0.25);}
 .nav-logo{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;letter-spacing:4px;color:var(--or);text-decoration:none;}
 .nav-links{display:flex;gap:4px;list-style:none;}
@@ -50,9 +82,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
 /* ── HERO ── */
 .hero{min-height:100vh;background:#C93D00;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:54px;}
+/* Grunge texture — replaces dots */
 .hero-grunge{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:var(--grunge);opacity:.11;}
-.hero-scratches{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(0,0,0,0.04) 12px,rgba(0,0,0,0.04) 13px);}
-.hero-vign{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(0,0,0,0.55) 100%), radial-gradient(ellipse at 50% 100%, transparent 40%, rgba(0,0,0,0.55) 100%), radial-gradient(ellipse at 0% 50%, transparent 40%, rgba(0,0,0,0.45) 100%), radial-gradient(ellipse at 100% 50%, transparent 40%, rgba(0,0,0,0.45) 100%);}
+/* Diagonal scratch lines — on-theme texture */
+.hero-scratches{position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:repeating-linear-gradient(
+    -45deg,
+    transparent,transparent 12px,
+    rgba(0,0,0,0.04) 12px,rgba(0,0,0,0.04) 13px
+  );
+}
+/* smooth cinematic vignette — soft edges not sharp blend */
+.hero-vign{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:
+    radial-gradient(ellipse at 50% 0%,   transparent 40%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(ellipse at 50% 100%, transparent 40%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(ellipse at 0%  50%,  transparent 40%, rgba(0,0,0,0.45) 100%),
+    radial-gradient(ellipse at 100% 50%, transparent 40%, rgba(0,0,0,0.45) 100%);
+}
 .hero-signal{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;}
 .hsig{position:absolute;left:0;right:0;height:1px;background:rgba(255,255,255,0.04);}
 .sparks{position:absolute;inset:0;pointer-events:none;z-index:3;}
@@ -75,7 +122,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 @keyframes flick{0%,100%{opacity:1;}91%{opacity:1;}93%{opacity:.45;}95%{opacity:1;}97%{opacity:.65;}99%{opacity:1;}}
 .crt-rule{width:80px;height:2px;background:var(--or);margin:10px auto;}
 .crt-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,1.6vw,16px);font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(245,239,224,0.55);margin-top:6px;}
-.crt-foot{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(8px,1vw,11px);font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,224,0.25);flex-wrap:wrap;}
+.crt-foot{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:clamp(8px,1vw,11px);font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,224,0.25);}
 .glitch-bar{position:absolute;left:0;right:0;height:3px;background:var(--or);opacity:.65;z-index:8;animation:gb 5.5s linear infinite;}
 @keyframes gb{0%{top:5%;opacity:0;}7%{opacity:.9;}9%{opacity:0;}60%{top:65%;opacity:0;}67%{opacity:.65;}69%{opacity:0;}100%{top:96%;opacity:0;}}
 .crt-ctrl{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 6px;}
@@ -96,36 +143,54 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 /* ── ABOUT ── */
 .about{background:var(--or);position:relative;overflow:hidden;padding:100px 60px 110px;}
 .about-grunge{position:absolute;inset:0;pointer-events:none;z-index:0;background-image:var(--grunge);opacity:.06;}
-.about-tex{position:absolute;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(-45deg,transparent,transparent 18px,rgba(0,0,0,0.035) 18px,rgba(0,0,0,0.035) 19px);}
-.about-vign{position:absolute;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 0%, transparent 35%, rgba(0,0,0,0.3) 100%), radial-gradient(ellipse at 50% 100%, transparent 35%, rgba(0,0,0,0.3) 100%), radial-gradient(ellipse at 0% 50%, transparent 40%, rgba(0,0,0,0.25) 100%), radial-gradient(ellipse at 100% 50%, transparent 40%, rgba(0,0,0,0.25) 100%);}
+/* diagonal scratches instead of dots — theme-consistent */
+.about-tex{position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:repeating-linear-gradient(
+    -45deg,
+    transparent,transparent 18px,
+    rgba(0,0,0,0.035) 18px,rgba(0,0,0,0.035) 19px
+  );
+}
+/* smooth soft vignette — no sharp edge */
+.about-vign{position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse at 50% 0%,   transparent 35%, rgba(0,0,0,0.3) 100%),
+    radial-gradient(ellipse at 50% 100%, transparent 35%, rgba(0,0,0,0.3) 100%),
+    radial-gradient(ellipse at 0%  50%,  transparent 40%, rgba(0,0,0,0.25) 100%),
+    radial-gradient(ellipse at 100% 50%, transparent 40%, rgba(0,0,0,0.25) 100%);
+}
 .about-content{position:relative;z-index:2;}
 .hello-line{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(28px,4vw,46px);color:rgba(245,239,224,0.4);letter-spacing:4px;line-height:1;margin-bottom:4px;}
 .name-line{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(52px,7.5vw,86px);color:#fff;letter-spacing:2px;line-height:.9;margin-bottom:10px;text-shadow:2px 3px 0 rgba(0,0,0,0.2);}
-.name-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(12px,1.8vw,16px);font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(245,239,224,0.85);margin-bottom:28px;}
+.name-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(12px,1.8vw,16px);font-weight:700;letter-spacing:5px;text-transform:uppercase;color:rgba(245,239,224,0.65);margin-bottom:28px;}
 .a-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(245,239,224,0.6);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
 .a-label::before{content:'';width:24px;height:1.5px;background:rgba(245,239,224,0.4);}
 
-/* AI SECTION STYLE */
-.ai-section { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 32px 0; border: 1px dashed rgba(255,255,255,0.2); }
-.ai-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; margin-top: 15px; }
-.ai-tool { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 6px; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 1px; color: #fff; }
-
+/* SOFTWARE ICONS — horizontal row */
 .sw-row-h{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;}
 .sw-item2{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default;}
 .sw-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;transition:transform .2s,box-shadow .2s;overflow:hidden;}
 .sw-icon:hover{transform:translateY(-3px) scale(1.08);}
 .sw-lbl{font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(245,239,224,0.6);text-align:center;}
-.i-ps{background:#001C24;} .i-ai{background:#2A1200;} .i-pr{background:#190038;} .i-ae{background:#180048;} .i-lr{background:#001830;} .i-cv{background:#7D2AE8;} .i-ue{background:#000;} .i-bl{background:#000;}
+.i-ps{background:#001C24;} .i-ps:hover{box-shadow:0 6px 18px rgba(49,197,240,0.5);}
+.i-ai{background:#2A1200;} .i-ai:hover{box-shadow:0 6px 18px rgba(255,154,0,0.5);}
+.i-pr{background:#190038;} .i-pr:hover{box-shadow:0 6px 18px rgba(153,153,255,0.5);}
+.i-ae{background:#180048;} .i-ae:hover{box-shadow:0 6px 18px rgba(157,164,255,0.5);}
+.i-lr{background:#001830;} .i-lr:hover{box-shadow:0 6px 18px rgba(49,168,255,0.5);}
+.i-cv{background:#7D2AE8;} .i-cv:hover{box-shadow:0 6px 18px rgba(0,196,204,0.5);}
+.i-ue{background:#0D0D0D;} .i-ue:hover{box-shadow:0 6px 18px rgba(255,255,255,0.35);}
+.i-bl{background:#0D0A1A;} .i-bl:hover{box-shadow:0 6px 18px rgba(234,118,0,0.5);}
 
-/* Corrected Unreal Logo */
-.ue-logo { width: 34px; height: 34px; fill: #fff; }
-/* Corrected Blender Logo */
-.bl-logo { width: 34px; height: 34px; }
-
+/* skill chips */
 .skill-chip{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,0.3);padding:5px 12px;border-radius:3px;background:rgba(0,0,0,0.15);margin:3px 3px 3px 0;}
+
+/* ABOUT INFO GRID */
 .about-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:40px;}
 .info-blk-ttl{font-family:'Oswald',sans-serif;font-weight:700;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:#fff;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid rgba(255,255,255,0.2);}
+
+/* EXPERIENCE CARD — company name as main, role as sub */
 .exp-card{margin-bottom:24px;padding:16px 18px;background:rgba(0,0,0,0.15);border-radius:8px;border-left:4px solid rgba(255,255,255,0.4);}
+.exp-card-header{margin-bottom:6px;}
 .exp-duration{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,0.5);margin-bottom:4px;}
 .exp-company{font-family:'Oswald',sans-serif;font-weight:700;font-size:18px;letter-spacing:1.5px;color:#fff;text-transform:uppercase;margin-bottom:2px;}
 .exp-role{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,0.7);margin-bottom:6px;}
@@ -135,11 +200,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .exp-bullets li{font-family:'Barlow',sans-serif;font-size:13px;color:rgba(245,239,224,0.72);line-height:1.6;padding-left:14px;position:relative;margin-bottom:5px;}
 .exp-bullets li::before{content:'→';position:absolute;left:0;color:rgba(245,239,224,0.45);font-size:11px;top:2px;}
 
+/* education entries */
 .edu-entry{margin-bottom:16px;padding-left:14px;border-left:3px solid rgba(255,255,255,0.3);}
 .edu-date{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,0.55);margin-bottom:2px;}
 .edu-degree{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;color:#fff;margin-bottom:2px;}
 .edu-school{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;color:rgba(245,239,224,0.65);margin-bottom:3px;}
+.edu-note{font-family:'Barlow',sans-serif;font-size:12px;color:rgba(245,239,224,0.48);line-height:1.5;}
 
+/* cert chips — clickable */
+.cert-chip{display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.25);padding:8px 14px;border-radius:6px;margin:5px 5px 5px 0;cursor:pointer;text-decoration:none;transition:all .2s;}
+.cert-chip:hover{background:rgba(0,0,0,0.4);border-color:rgba(255,255,255,0.5);transform:translateY(-1px);}
+.cert-chip-icon{width:18px;height:18px;background:rgba(255,255,255,0.15);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+
+.skill-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:9px;}
+.skill-row::before{content:'→';color:rgba(245,239,224,0.55);font-size:12px;flex-shrink:0;margin-top:1px;}
+.skill-row-txt{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1px;color:rgba(245,239,224,0.88);}
 .contact-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
 .contact-ico{width:30px;height:30px;background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .contact-ico svg{width:13px;height:13px;fill:rgba(245,239,224,0.85);}
@@ -149,11 +224,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .sec-hdr{padding:60px 60px 50px;position:relative;overflow:hidden;}
 .sec-hdr.lt,.sec-hdr.dk{background:var(--or);}
 .sec-hdr-grunge{position:absolute;inset:0;background-image:var(--grunge);opacity:.07;pointer-events:none;z-index:0;}
-.sec-hdr-tex{position:absolute;inset:0;pointer-events:none;z-index:1;background-image:repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(0,0,0,0.04) 12px,rgba(0,0,0,0.04) 13px);}
-.sec-hdr-vign{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 0% 50%,rgba(0,0,0,0.28) 0%,transparent 60%), radial-gradient(ellipse at 100% 50%,rgba(0,0,0,0.28) 0%,transparent 60%);}
+.sec-hdr-tex{position:absolute;inset:0;pointer-events:none;z-index:1;
+  background-image:repeating-linear-gradient(-45deg,transparent,transparent 12px,rgba(0,0,0,0.04) 12px,rgba(0,0,0,0.04) 13px);}
+.sec-hdr-vign{position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:radial-gradient(ellipse at 0% 50%,rgba(0,0,0,0.28) 0%,transparent 60%),
+             radial-gradient(ellipse at 100% 50%,rgba(0,0,0,0.28) 0%,transparent 60%);}
 .sec-n{font-family:'Oswald',sans-serif;font-weight:700;font-size:90px;line-height:1;letter-spacing:2px;margin-bottom:-18px;position:relative;z-index:3;color:rgba(245,239,224,.13);}
 .sec-t{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(48px,7vw,82px);letter-spacing:3px;line-height:1;position:relative;z-index:3;color:#fff;text-shadow:2px 3px 0 rgba(0,0,0,0.18);}
 
+/* ── PROJECT BLOCKS ── */
 .pb{background:var(--bg);padding:48px 60px 60px;}
 .pb.alt{background:var(--bg2);}
 .pm{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:14px;border-bottom:1.5px solid rgba(13,13,13,.1);}
@@ -164,13 +243,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:34px;}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:34px;}
 .ic{border-radius:8px;overflow:hidden;background:#ccc;position:relative;aspect-ratio:16/9;}
+.ic.sq{aspect-ratio:1/1;}
 .ic.tall{aspect-ratio:4/5;}
 .ic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.ic:hover img{transform:scale(1.05);}
 .ph2{width:100%;height:100%;background:#C8BFAC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
 .ph-ico{width:28px;height:28px;border-radius:50%;border:2px dashed rgba(13,13,13,.22);display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(13,13,13,.28);}
 .ph2 span{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(13,13,13,.32);text-align:center;padding:0 10px;}
 .bdot{position:absolute;top:8px;left:8px;z-index:2;background:var(--or);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
 
+/* TOC */
 .toc{background:var(--bg2);padding:60px;}
 .toc-ttl{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(24px,4vw,38px);letter-spacing:4px;color:var(--blk);margin-bottom:30px;}
 .toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -180,51 +262,134 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .tc-n{font-family:'Oswald',sans-serif;font-weight:700;font-size:32px;color:var(--or);line-height:1;margin-bottom:4px;transition:color .22s;}
 .tc-l{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blk);transition:color .22s;}
 
+/* VIDEO */
 .vb{background:#0A0A0A;padding:48px 60px 60px;}
 .vb .c-lbl{color:var(--ylw);}
 .vb .pb-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:24px;letter-spacing:2px;color:#fff;margin-bottom:8px;}
+.vb .c-txt{color:rgba(245,239,224,.42);}
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .vc{border-radius:10px;overflow:hidden;background:#111;position:relative;aspect-ratio:9/16;}
+.vc iframe{width:100%;height:100%;border:none;display:block;}
 .vph{width:100%;height:100%;background:#1A1200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 .play-c{width:58px;height:58px;border-radius:50%;border:2px solid rgba(245,239,224,.22);display:flex;align-items:center;justify-content:center;}
 .play-c::after{content:'';border-left:20px solid rgba(245,239,224,.45);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px;}
+.vlbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,.28);text-align:center;padding:0 16px;}
 
+/* CONNECT */
 .connect{background:#0A0A0A;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 40px 120px;}
+.connect-grunge{position:absolute;inset:0;background-image:var(--grunge);opacity:.08;pointer-events:none;z-index:0;}
+.connect-vign{position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,0.6) 100%);}
 .conn-ghost{position:absolute;font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(70px,18vw,210px);color:rgba(232,71,10,0.055);letter-spacing:10px;line-height:1;pointer-events:none;user-select:none;white-space:nowrap;z-index:0;}
-.conn-eye{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--or);margin-bottom:20px;position:relative;z-index:2; text-align:center; width: 90%; margin: 0 auto 20px;}
+.conn-eye{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--or);margin-bottom:20px;position:relative;z-index:2;}
 .cctv-wrap{position:relative;z-index:2;display:flex;align-items:flex-end;gap:0;width:min(900px,90vw);}
+.cctv-figure{position:relative;width:clamp(150px,20vw,240px);flex-shrink:0;}
+.old-tv{width:100%;background:#1A1005;border-radius:8px;border:3px solid #2A1A06;padding:8px;box-shadow:0 20px 40px rgba(0,0,0,0.85);}
+.old-tv-screen{background:#060300;border-radius:4px;aspect-ratio:4/3;position:relative;overflow:hidden;border:3px solid #0D0600;}
+.tv-static{position:absolute;inset:0;background-image:var(--grunge);opacity:.4;animation:staticfk .12s steps(1) infinite;}
+@keyframes staticfk{0%{opacity:.25;}20%{opacity:.48;}40%{opacity:.2;}60%{opacity:.42;}80%{opacity:.3;}100%{opacity:.38;}}
+.tv-crack{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.tv-crack::after{content:'';width:2px;height:55%;background:rgba(232,71,10,0.55);transform:rotate(12deg);box-shadow:3px 5px 0 rgba(232,71,10,0.25),-2px -3px 0 rgba(232,71,10,0.2);}
+.cctv-cam-only{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:3px;}
+.cam-bracket{width:6px;height:18px;background:#2A2A2A;border-radius:3px;}
+.cam-body{display:flex;align-items:center;background:#1A1A1A;border-radius:5px 5px 3px 3px;border:1.5px solid #333;padding:5px 8px;gap:5px;position:relative;}
+.cam-lens{width:14px;height:14px;border-radius:50%;background:#0A0A0A;border:2px solid #444;position:relative;}
+.cam-lens::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:#222;border-radius:50%;box-shadow:0 0 4px rgba(232,71,10,0.6);}
+.cam-detail{display:flex;flex-direction:column;gap:3px;}
+.cam-led{width:5px;height:5px;border-radius:50%;background:#E8470A;animation:ledblink 1.5s ease-in-out infinite;}
+@keyframes ledblink{0%,100%{opacity:1;}50%{opacity:.15;}}
+.cam-strip{width:18px;height:2px;background:#333;border-radius:1px;}
+.cam-beam{position:absolute;left:calc(100% + 4px);top:50%;transform:translateY(-50%);width:0;height:0;border-top:clamp(14px,3vw,26px) solid transparent;border-bottom:clamp(14px,3vw,26px) solid transparent;border-left:clamp(80px,14vw,160px) solid rgba(232,71,10,0.1);pointer-events:none;}
+.cctv-wires{position:absolute;left:-10px;top:0;height:100%;width:24px;pointer-events:none;}
+.conn-projection{flex:1;padding-left:clamp(20px,3.5vw,50px);position:relative;z-index:2;}
+.conn-thanks{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,1.5vw,15px);font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(245,239,224,0.4);margin-bottom:4px;}
+.conn-h{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(46px,8vw,96px);color:#fff;letter-spacing:3px;line-height:.88;margin-bottom:10px;}
+.conn-h span{color:var(--or);}
+.conn-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(10px,1.4vw,14px);font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,.32);margin-bottom:28px;}
 .conn-btn{display:inline-block;font-family:'Oswald',sans-serif;font-weight:700;font-size:18px;letter-spacing:3px;color:var(--blk);background:#fff;padding:15px 50px;border-radius:6px;text-decoration:none;transition:all .25s;border:2px solid transparent;}
+.conn-btn:hover{background:transparent;color:#fff;border-color:#fff;}
 .footer{background:var(--blk);border-top:1px solid rgba(255,255,255,.05);padding:18px 60px 72px;display:flex;align-items:center;justify-content:space-between;}
+.f-n{font-family:'Oswald',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;color:rgba(245,239,224,.18);}
+.f-y{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,.12);}
+/* ── AI TOOLS SECTION ── */
+.ai-intro{background:#0A0A0A;padding:48px 60px 20px;}
+.ai-intro-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--or);margin-bottom:10px;}
+.ai-intro-text{font-family:'Barlow',sans-serif;font-size:15px;line-height:1.8;color:rgba(245,239,224,0.6);max-width:720px;}
+.ai-tools-grid{background:#0A0A0A;padding:20px 60px 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.ai-card{background:#111;border:1px solid rgba(232,71,10,0.18);border-radius:12px;padding:20px;transition:all .25s;position:relative;overflow:hidden;}
+.ai-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,71,10,0.06) 0%,transparent 60%);pointer-events:none;}
+.ai-card:hover{border-color:var(--or);transform:translateY(-3px);box-shadow:0 12px 32px rgba(232,71,10,0.18);}
+.ai-card-top{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:12px;}
+.ai-logo-wrap{width:52px;height:52px;border-radius:12px;overflow:hidden;margin-bottom:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.ai-card-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:17px;letter-spacing:1.5px;color:#fff;line-height:1.1;}
+.ai-card-by{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,239,224,0.35);margin-top:2px;}
+.ai-card-desc{font-family:'Barlow',sans-serif;font-size:12.5px;line-height:1.7;color:rgba(245,239,224,0.55);margin-bottom:14px;}
+.ai-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--or);border:1px solid rgba(232,71,10,0.4);padding:3px 9px;border-radius:3px;}
+
+@media(max-width:1024px){.ai-tools-grid{grid-template-columns:repeat(3,1fr);padding-left:40px;padding-right:40px;}.ai-intro{padding-left:40px;padding-right:40px;}}
+@media(max-width:768px){.ai-tools-grid{grid-template-columns:repeat(2,1fr);padding-left:20px;padding-right:20px;}.ai-intro{padding-left:20px;padding-right:20px;}}
+@media(max-width:480px){.ai-tools-grid{grid-template-columns:1fr;}}
+
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.on{opacity:1;transform:translateY(0);}
 
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .about{padding:80px 40px 90px;}
+  .about-info-grid{gap:22px;}
+  .sec-hdr,.pb,.vb,.toc,.connect{padding-left:40px;padding-right:40px;}
+}
 @media(max-width:768px){
   nav{padding:12px 18px;}
   .nav-links{display:none;}
   .about{padding:60px 20px 80px;}
   .about-info-grid{grid-template-columns:1fr;}
-  .g4,.g3{grid-template-columns:repeat(2,1fr);}
+  .sec-hdr,.pb,.vb,.toc,.connect{padding-left:20px;padding-right:20px;}
+  .sec-hdr{padding-top:40px;padding-bottom:36px;}
+  .sec-n{font-size:60px;}
+  .sec-t{font-size:clamp(36px,10vw,56px);}
+  .g4{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(2,1fr);}
   .vgrid{grid-template-columns:1fr;}
   .toc-grid{grid-template-columns:repeat(2,1fr);}
   .footer{padding:14px 20px 72px;flex-direction:column;gap:6px;text-align:center;}
+  .call-bar{padding:10px 16px;}
+  .call-text{display:none;}
   .cctv-wrap{flex-direction:column;align-items:center;}
+  .conn-projection{padding-left:0;text-align:center;margin-top:20px;}
+  .crt-feet{padding:0 40px;}
+  .sw-icon{width:44px;height:44px;}
+  .pb{padding:32px 20px 40px;}
+}
+@media(max-width:480px){
+  .toc-grid{grid-template-columns:1fr;}
+  .g4,.g3{grid-template-columns:repeat(2,1fr);}
+  .about-info-grid{grid-template-columns:1fr;}
+  nav{padding:10px 14px;}
+  .call-num{font-size:15px;}
+  .sw-row-h{gap:8px;}
+  .sw-icon{width:40px;height:40px;}
 }
 </style>
 </head>
 <body>
 
 <div id="cur"></div>
+<div id="cur-ring"></div>
 
+<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">ALI.</a>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#aboutme">About Me</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#ai-tools">AI Workflow</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
 </nav>
 
+<!-- CALL BAR -->
 <div class="call-bar">
   <a href="tel:+919136545707" class="call-inner">
     <div class="call-icon">
@@ -236,12 +401,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
   </a>
 </div>
 
+<!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-grunge"></div>
   <div class="hero-scratches"></div>
   <div class="hero-vign"></div>
   <div class="hero-signal" id="sigbars"></div>
   <div class="sparks" id="sparks"></div>
+
+  <!-- Available for Work badge — now inside hero, properly centered, mobile safe -->
+  <div class="avail-badge">
+    <div class="avail-inner">
+      <div class="avail-dot"></div>
+      <span class="avail-txt">Available for Work · Andheri, Mumbai</span>
+    </div>
+  </div>
 
   <div class="tv-wrap">
     <div class="crt-body">
@@ -252,7 +426,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
         <div class="tv-sig"></div>
         <div class="tv-sig s2"></div>
         <div class="crt-content">
-          <div class="crt-lbl">Ali Shaikh · Wadala, Mumbai</div>
+          <div class="crt-lbl">Ali Shaikh · Andheri, Mumbai</div>
           <div class="crt-title">PORTFOLIO</div>
           <div class="crt-rule"></div>
           <div class="crt-sub">Creative Designer &amp; Brand Builder</div>
@@ -281,12 +455,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
   <div class="ticker-wrap">
     <div class="ticker-track">
-      <span>Creative Designer</span><span class="dot">✦</span><span>Brand Builder</span><span class="dot">✦</span><span>Reel Director</span><span class="dot">✦</span><span>Social Media Mastery</span><span class="dot">✦</span><span>Mumbai Based</span><span class="dot">✦</span><span>Product Photography</span><span class="dot">✦</span><span>AI Specialist</span><span class="dot">✦</span>
-      <span>Creative Designer</span><span class="dot">✦</span><span>Brand Builder</span><span class="dot">✦</span><span>Reel Director</span><span class="dot">✦</span><span>Social Media Mastery</span><span class="dot">✦</span><span>Mumbai Based</span><span class="dot">✦</span><span>Product Photography</span><span class="dot">✦</span><span>AI Specialist</span><span class="dot">✦</span>
+      <span>Creative Designer</span><span class="dot">✦</span><span>Brand Builder</span><span class="dot">✦</span><span>Content Strategist</span><span class="dot">✦</span><span>Social Media</span><span class="dot">✦</span><span>Mumbai Based</span><span class="dot">✦</span><span>Product Photography</span><span class="dot">✦</span><span>Reel Director</span><span class="dot">✦</span><span>After Effects</span><span class="dot">✦</span><span>Generative AI</span><span class="dot">✦</span>
+      <span>Creative Designer</span><span class="dot">✦</span><span>Brand Builder</span><span class="dot">✦</span><span>Content Strategist</span><span class="dot">✦</span><span>Social Media</span><span class="dot">✦</span><span>Mumbai Based</span><span class="dot">✦</span><span>Product Photography</span><span class="dot">✦</span><span>Reel Director</span><span class="dot">✦</span><span>After Effects</span><span class="dot">✦</span><span>Generative AI</span><span class="dot">✦</span>
     </div>
   </div>
 </section>
 
+<!-- ABOUT ME -->
 <section class="about reveal" id="aboutme">
   <div class="about-grunge"></div>
   <div class="about-tex"></div>
@@ -295,138 +470,537 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 
     <div class="hello-line">HELLOOOO, I'M</div>
     <div class="name-line">ALI SHAIKH.</div>
-    <div class="name-sub">Creative Designer &nbsp;·&nbsp; Brand Builder &nbsp;·&nbsp; Reel Specialist</div>
+    <div class="name-sub">Creative Designer &nbsp;·&nbsp; Brand Builder &nbsp;·&nbsp; Reel &amp; Content Creator &nbsp;·&nbsp; Social Media Strategist</div>
 
-    <div class="a-label">My Favorite Skills</div>
-    <div style="margin-bottom:36px;">
-      <span class="skill-chip" style="background: #fff; color: var(--or);">Directing & Shooting Reels</span>
-      <span class="skill-chip" style="background: #fff; color: var(--or);">Handling Social Media Brands</span>
-      <span class="skill-chip">Product Photography</span>
-      <span class="skill-chip">Graphic Design</span>
-      <span class="skill-chip">Brand Identity</span>
-    </div>
-
-    <div class="ai-section">
-      <div class="a-label" style="color:var(--ylw)">AI-Powered Productivity</div>
-      <p style="font-family:'Barlow',sans-serif;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;max-width:800px;">
-        I don't just design; I use Generative AI to accelerate my workflow. From generating high-end creative ads to content ideation, I leverage top-tier AI tools to deliver faster results without compromising on brand quality.
-      </p>
-      <div class="ai-grid">
-        <div class="ai-tool">Claude 3.5</div>
-        <div class="ai-tool">ChatGPT-4</div>
-        <div class="ai-tool">Nano Banana</div>
-        <div class="ai-tool">Veo 3</div>
-        <div class="ai-tool">Leonardo AI</div>
-        <div class="ai-tool">Adobe Firefly</div>
-        <div class="ai-tool">Ideogram</div>
-      </div>
-    </div>
-
-    <div class="a-label">Software Toolkit</div>
+    <!-- SOFTWARE ICONS — horizontal row, properly placed -->
+    <div class="a-label">Tools I Use</div>
     <div class="sw-row-h">
       <div class="sw-item2">
-        <div class="sw-icon i-ps"><svg viewBox="0 0 50 50" width="52" height="52"><rect width="50" height="50" rx="10" fill="#001C24"/><text x="7" y="34" font-family="Arial Black" font-size="21" fill="#31C5F0">Ps</text></svg></div>
+        <div class="sw-icon i-ps">
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#001C24"/><text x="7" y="34" font-family="Arial Black,Arial" font-size="21" font-weight="900" fill="#31C5F0">Ps</text></svg>
+        </div>
         <span class="sw-lbl">Photoshop</span>
       </div>
       <div class="sw-item2">
-        <div class="sw-icon i-ai"><svg viewBox="0 0 50 50" width="52" height="52"><rect width="50" height="50" rx="10" fill="#2A1200"/><text x="7" y="34" font-family="Arial Black" font-size="21" fill="#FF9A00">Ai</text></svg></div>
+        <div class="sw-icon i-ai">
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#2A1200"/><text x="7" y="34" font-family="Arial Black,Arial" font-size="21" font-weight="900" fill="#FF9A00">Ai</text></svg>
+        </div>
         <span class="sw-lbl">Illustrator</span>
       </div>
       <div class="sw-item2">
-        <div class="sw-icon i-pr"><svg viewBox="0 0 50 50" width="52" height="52"><rect width="50" height="50" rx="10" fill="#190038"/><text x="7" y="34" font-family="Arial Black" font-size="21" fill="#9999FF">Pr</text></svg></div>
+        <div class="sw-icon i-pr">
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#190038"/><text x="7" y="34" font-family="Arial Black,Arial" font-size="21" font-weight="900" fill="#9999FF">Pr</text></svg>
+        </div>
         <span class="sw-lbl">Premiere</span>
       </div>
       <div class="sw-item2">
+        <div class="sw-icon i-ae">
+          <!-- After Effects correct 2-letter Ae -->
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+            <rect width="50" height="50" rx="10" fill="#180048"/>
+            <!-- Ae in correct purple/blue color -->
+            <text x="5" y="34" font-family="Arial Black,Arial" font-size="20" font-weight="900" fill="#9DA4FF">Ae</text>
+          </svg>
+        </div>
+        <span class="sw-lbl">After Effects</span>
+      </div>
+      <div class="sw-item2">
+        <div class="sw-icon i-lr">
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg"><rect width="50" height="50" rx="10" fill="#001830"/><text x="7" y="34" font-family="Arial Black,Arial" font-size="21" font-weight="900" fill="#31A8FF">Lr</text></svg>
+        </div>
+        <span class="sw-lbl">Lightroom</span>
+      </div>
+      <!-- Canva Pro — real logo style: gradient circle + white C -->
+      <div class="sw-item2">
+        <div class="sw-icon i-cv" style="padding:0;overflow:hidden;">
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00C4CC"/>
+                <stop offset="50%" stop-color="#7D2AE8"/>
+                <stop offset="100%" stop-color="#7D2AE8"/>
+              </linearGradient>
+            </defs>
+            <rect width="50" height="50" rx="10" fill="url(#cg)"/>
+            <!-- Bold italic C like Canva -->
+            <text x="10" y="36" font-family="Georgia,serif" font-size="30" font-weight="bold" font-style="italic" fill="#fff">C</text>
+          </svg>
+        </div>
+        <span class="sw-lbl">Canva Pro</span>
+      </div>
+      <!-- Unreal Engine — proper UE5 logo -->
+      <div class="sw-item2">
         <div class="sw-icon i-ue">
-          <svg class="ue-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="6"/>
-            <path d="M50 20 C 35 20, 25 35, 25 50 C 25 75, 50 80, 50 80 C 50 80, 75 75, 75 50 C 75 35, 65 20, 50 20 Z M50 65 C 40 65, 35 60, 35 50 C 35 40, 40 35, 50 35 C 60 35, 65 40, 65 50 C 65 60, 60 65, 50 65 Z" fill="white"/>
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+            <rect width="50" height="50" rx="10" fill="#0D0D0D"/>
+            <circle cx="25" cy="25" r="17" fill="none" stroke="#fff" stroke-width="2"/>
+            <path d="M18 17 L18 27 Q18 33 25 33 Q32 33 32 27 L32 17" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <line x1="18" y1="17" x2="18" y2="20" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="32" y1="17" x2="32" y2="20" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
           </svg>
         </div>
         <span class="sw-lbl">Unreal Engine</span>
       </div>
+      <!-- Blender — correct orange circular logo -->
       <div class="sw-item2">
         <div class="sw-icon i-bl">
-          <svg class="bl-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <path d="M85 50 A 35 35 0 1 1 15 50 A 35 35 0 1 1 85 50" fill="none" stroke="#EA7600" stroke-width="8"/>
-            <circle cx="50" cy="50" r="12" fill="#EA7600"/>
-            <path d="M50 15 L 50 35 M85 50 L 65 50 M15 50 L 35 50" stroke="#EA7600" stroke-width="8" stroke-linecap="round"/>
+          <svg viewBox="0 0 50 50" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+            <rect width="50" height="50" rx="10" fill="#0D0A1A"/>
+            <!-- Blender icon: half-circle handle + circle eye + orbit ring -->
+            <circle cx="30" cy="22" r="9" fill="none" stroke="#EA7600" stroke-width="2.2"/>
+            <circle cx="30" cy="22" r="3.5" fill="#EA7600"/>
+            <!-- left arm -->
+            <path d="M21 22 L12 22 L12 28 Q12 36 20 36 L38 36" stroke="#EA7600" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 22 L17 15" stroke="#EA7600" stroke-width="1.8" fill="none" stroke-linecap="round"/>
           </svg>
         </div>
         <span class="sw-lbl">Blender</span>
       </div>
+        <span class="sw-lbl">Blender</span>
+      </div>
     </div>
 
+    <!-- What I Do -->
+    <div class="a-label">What I Do</div>
+    <div style="margin-bottom:36px;">
+      <span class="skill-chip">Creative Designer</span>
+      <span class="skill-chip">Brand Builder</span>
+      <span class="skill-chip">Reel Shoot &amp; Direction</span>
+      <span class="skill-chip">Content Creator</span>
+      <span class="skill-chip">Social Media Manager</span>
+      <span class="skill-chip">Product Photography</span>
+      <span class="skill-chip">Brand Identity</span>
+      <span class="skill-chip">YouTube Thumbnails</span>
+      <span class="skill-chip">Video Editing</span>
+      <span class="skill-chip">Generative AI Design</span>
+      <span class="skill-chip">Campaign Design</span>
+      <span class="skill-chip">Content Planning</span>
+      <span class="skill-chip">Team Training</span>
+    </div>
+
+    <!-- 2-col grid: Experience left, Education+Skills+Contact right -->
     <div class="about-info-grid">
+
+      <!-- LEFT: EXPERIENCE — Memory Bank first, then Khataverse, then Freelance -->
       <div>
         <div class="info-blk-ttl">Experience</div>
+
+        <!-- 1. MEMORY BANK -->
         <div class="exp-card">
-          <div class="exp-duration">Jan 2025 — Apr 2026</div>
+          <div class="exp-duration">Jan 2025 – Apr 2026 · 1.5 Years</div>
           <div class="exp-company">Memory Bank</div>
           <div class="exp-role">Senior Creative Designer</div>
           <div class="exp-location">Andheri, Mumbai</div>
           <ul class="exp-bullets">
-            <li>Built visual identity from zero alongside the founder.</li>
-            <li>Directing and editing brand reels & product shoots.</li>
-            <li>Managed complete social media strategy and client relations.</li>
+            <li>Joined when the company had only a logo — built entire visual identity from zero alongside the founder</li>
+            <li>Led all graphic design: brand creatives, social posts, campaigns, product packaging</li>
+            <li>Managed product photography — custom art books, frames, calendars, stickers &amp; name tags</li>
+            <li>Directed and edited indoor &amp; outdoor brand reels, ideation to final cut</li>
+            <li>Managed complete social media strategy, scheduling and community engagement</li>
+            <li>Drove business development: client acquisition, lead follow-up, order management &amp; client relationship management</li>
+            <li>Trained junior designers on software, workflows and brand standards</li>
+            <li>First and most senior creative employee after the founder</li>
           </ul>
         </div>
+
+        <!-- 2. KHATAVERSE -->
         <div class="exp-card">
-          <div class="exp-duration">6 Months · Mar 2024 — Aug 2024</div>
+          <div class="exp-duration">6 Months · Mar 2024 – Aug 2024</div>
           <div class="exp-company">Khataverse Media</div>
-          <div class="exp-role">Graphic Designer & Video Editor</div>
+          <div class="exp-role">Graphic Designer &amp; Video Editor</div>
           <div class="exp-location">Andheri, Mumbai</div>
           <ul class="exp-bullets">
-            <li>Created engaging short-form video for OTT and social media.</li>
-            <li>Designed high-CTR YouTube thumbnails for podcast growth.</li>
+            <li>Edited engaging reels and short-form video content for social media and OTT platforms</li>
+            <li>Designed YouTube thumbnails that improved click-through rates and boosted channel growth</li>
+            <li>Created Instagram reel covers and visual assets for the podcast brand</li>
+            <li>Provided creative direction and aesthetic feedback to enhance the channel's online presence</li>
           </ul>
         </div>
+
+        <!-- 3. FREELANCE -->
         <div class="exp-card">
-          <div class="exp-duration">2023 — Present</div>
+          <div class="exp-duration">2023 – Present · Ongoing</div>
           <div class="exp-company">Independent Work</div>
           <div class="exp-role">Freelance Creative Designer</div>
-          <div class="exp-location">Wadala, Mumbai</div>
+          <div class="exp-location">Mumbai</div>
+          <ul class="exp-bullets">
+            <li><strong style="color:rgba(245,239,224,0.9);">Aesthetic Clinic</strong> — Complete brand identity, visual language and content strategy for a beauty &amp; wellness brand</li>
+            <li>Reel shoot, direction and editing for client social media content</li>
+            <li>Content planning and monthly social media calendars</li>
+            <li>Thumbnail design, post creatives and campaign visuals for various clients</li>
+          </ul>
         </div>
       </div>
 
+      <!-- RIGHT: EDUCATION + SKILLS + CONTACT -->
       <div style="display:flex;flex-direction:column;gap:36px;">
+
+        <!-- EDUCATION -->
+        <div>
+          <div class="info-blk-ttl">Education</div>
+          <div class="edu-entry">
+            <div class="edu-date">Jun 2024 — Mar 2027</div>
+            <div class="edu-degree">Bachelor of Science</div>
+            <div class="edu-school">G R Patil College of Arts, Science, Commerce</div>
+            <div class="edu-note">Specialization in Technical Knowledge · Computer Graphics</div>
+          </div>
+          <div class="edu-entry">
+            <div class="edu-date">Sep 2023 — Aug 2025</div>
+            <div class="edu-degree">3D Animation</div>
+            <div class="edu-school">MAAC</div>
+            <div class="edu-note">Animation, Project Management &amp; Design Fundamentals</div>
+          </div>
+          <div class="edu-entry">
+            <div class="edu-date">Mar 2022 — Jun 2023</div>
+            <div class="edu-degree">Higher Secondary Certificate</div>
+            <div class="edu-school">Hariom College Arts &amp; Science</div>
+          </div>
+
+          <!-- CERTIFICATIONS — clickable, open in new tab -->
+          <div style="margin-top:20px;">
+            <div class="info-blk-ttl" style="font-size:16px;">Certifications</div>
+            <p style="font-family:'Barlow',sans-serif;font-size:12px;color:rgba(245,239,224,0.5);margin-bottom:10px;line-height:1.5;">Click any certificate below to open it — you can link your image, Google Drive, or cloud URL directly here.</p>
+            <a href="#" class="cert-chip" onclick="alert('Replace href with your certificate image URL or Google Drive link');return false;">
+              <span class="cert-chip-icon">📄</span>Graphic Designing — MAAC
+            </a>
+            <a href="#" class="cert-chip" onclick="alert('Replace href with your certificate image URL or Google Drive link');return false;">
+              <span class="cert-chip-icon">📄</span>Video Editing — MAAC
+            </a>
+            <a href="#" class="cert-chip" onclick="alert('Replace href with your certificate image URL or Google Drive link');return false;">
+              <span class="cert-chip-icon">📄</span>Branding — MAAC
+            </a>
+          </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div>
+          <div class="info-blk-ttl">Skills</div>
+          <div class="skill-row"><span class="skill-row-txt">Creative Thinking &amp; Problem Solving</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Brand Identity &amp; Visual Design</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Social Media Design &amp; Strategy</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Product Photography &amp; Styling</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Video Editing &amp; Reel Direction</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Client Communication &amp; Sales</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Business Development</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Team Leadership &amp; Training</span></div>
+          <div class="skill-row"><span class="skill-row-txt">Generative AI in Design</span></div>
+        </div>
+
+        <!-- CONTACT -->
         <div>
           <div class="info-blk-ttl">Contact</div>
           <div class="contact-row">
-            <div class="contact-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg></div>
+            <div class="contact-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
             <span class="contact-val">Wadala, Mumbai</span>
           </div>
           <div class="contact-row">
-            <div class="contact-ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5"/></svg></div>
+            <div class="contact-ico"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg></div>
             <span class="contact-val">+91 91365 45707</span>
           </div>
+          <div class="contact-row">
+            <div class="contact-ico"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+            <span class="contact-val">sk.mohdali707@gmail.com</span>
+          </div>
         </div>
-        <div>
-            <div class="info-blk-ttl">Education</div>
-            <div class="edu-entry">
-              <div class="edu-date">Jun 2024 — Mar 2027</div>
-              <div class="edu-degree">Bachelor of Science</div>
-              <div class="edu-school">G R Patil College</div>
-            </div>
-        </div>
+
       </div>
     </div>
   </div>
 </section>
 
+<!-- TOC -->
 <section class="toc reveal" id="projects">
   <div class="toc-ttl">Work &amp; Projects</div>
   <div class="toc-grid">
-    <a href="#social-media" class="toc-c"><div class="tc-n">01</div><div class="tc-l">Social Media</div></a>
+    <a href="#social-media" class="toc-c"><div class="tc-n">01</div><div class="tc-l">Social Media Creatives</div></a>
     <a href="#branding" class="toc-c"><div class="tc-n">02</div><div class="tc-l">Branding</div></a>
-    <a href="#reels" class="toc-c"><div class="tc-n">03</div><div class="tc-l">Reels & Video</div></a>
+    <a href="#product-photos" class="toc-c"><div class="tc-n">03</div><div class="tc-l">Product Photography</div></a>
+    <a href="#thumbnails" class="toc-c"><div class="tc-n">04</div><div class="tc-l">Thumbnail Designs</div></a>
+    <a href="#reels" class="toc-c"><div class="tc-n">05</div><div class="tc-l">Reels &amp; Video</div></a>
   </div>
 </section>
 
+<!-- 01 SOCIAL MEDIA -->
+<div class="sec-hdr lt reveal" id="social-media">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">01</div><div class="sec-t">SOCIAL MEDIA<br>CREATIVES</div>
+</div>
+<div class="pb reveal">
+  <div class="pm"><span class="p-tag">Project 01</span><span class="p-brand">Memory Bank</span></div>
+  <div class="c-lbl">Social Media Design</div>
+  <p class="c-txt">Memory Bank converts children's artwork into premium keepsake products — custom art books, preservation frames, personalised calendars, stickers and name tags. Built the complete social identity from zero. All posts, stories, campaigns and brand templates created in-house as part of a full creative strategy.</p>
+  <div class="g4">
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Memory Bank Post 1</span></div><div class="bdot">Memory Bank</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Memory Bank Post 2</span></div><div class="bdot">Memory Bank</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Memory Bank Post 3</span></div><div class="bdot">Memory Bank</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Memory Bank Post 4</span></div><div class="bdot">Memory Bank</div></div>
+  </div>
+</div>
+<div class="pb alt reveal">
+  <div class="pm"><span class="p-tag">Project 02</span><span class="p-brand">Khataverse Media</span></div>
+  <div class="c-lbl">Social Media Design</div>
+  <p class="c-txt">Visual content for Khataverse Media's podcast brand — YouTube thumbnails engineered for high click-through rates, Instagram reel covers and social creatives with bold editorial typography that communicate the energy of storytelling and conversation.</p>
+  <div class="g4">
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Khataverse Thumbnail 1</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Khataverse Thumbnail 2</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Reel Cover 1</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic sq"><div class="ph2"><div class="ph-ico">+</div><span>Reel Cover 2</span></div><div class="bdot">Khataverse</div></div>
+  </div>
+</div>
+
+<!-- 02 BRANDING -->
+<div class="sec-hdr dk reveal" id="branding">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">02</div><div class="sec-t">BRANDING</div>
+</div>
+<div class="pb reveal">
+  <div class="pm"><span class="p-tag">Project 01</span><span class="p-brand">Memory Bank</span></div>
+  <div class="c-lbl">Full Brand Identity</div>
+  <p class="c-txt">Joined when Memory Bank had only a logo. Developed the complete visual identity alongside the founder — color palette, typography system, social media templates, brand guidelines, product packaging and custom cover designs. Served as first and most senior creative after the founder for 1.5 years.</p>
+  <div class="g3">
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Brand Guidelines / Logo System</span></div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Color Palette + Typography</span></div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Brand Mockups &amp; Packaging</span></div></div>
+  </div>
+</div>
+<div class="pb alt reveal">
+  <div class="pm"><span class="p-tag">Project 02</span><span class="p-brand">Aesthetic Clinic</span></div>
+  <div class="c-lbl">Brand Identity · Freelance</div>
+  <p class="c-txt">Complete branding and visual language for a beauty and wellness clinic. Developed brand identity, content strategy, reel direction and social media creatives tailored to attract a premium clientele.</p>
+  <div class="g3">
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Clinic Brand Identity</span></div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Social Media Templates</span></div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Campaign Visuals</span></div></div>
+  </div>
+</div>
+
+<!-- 03 PRODUCT PHOTOGRAPHY -->
+<div class="sec-hdr lt reveal" id="product-photos">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">03</div><div class="sec-t">PRODUCT<br>PHOTOGRAPHY</div>
+</div>
+<div class="pb reveal">
+  <div class="c-lbl">Photography · Memory Bank</div>
+  <p class="c-txt">Conceptualised and executed product photography for Memory Bank's full range — custom art books, preservation frames, personalised calendars, name tags and sticker sets. Each shoot was art directed with warm, lifestyle-inspired setups designed to communicate the emotional value and craftsmanship of the products, making them feel like cherished keepsakes rather than standard merchandise.</p>
+  <div class="g3">
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Art Book Shot</span></div></div>
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Frame &amp; Prints Shot</span></div></div>
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Calendar Product Shot</span></div></div>
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Sticker &amp; Name Tag Shot</span></div></div>
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Lifestyle Product Shot</span></div></div>
+    <div class="ic tall"><div class="ph2"><div class="ph-ico">+</div><span>Flatlay Product Shot</span></div></div>
+  </div>
+</div>
+
+<!-- 04 THUMBNAILS -->
+<div class="sec-hdr dk reveal" id="thumbnails">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">04</div><div class="sec-t">THUMBNAIL<br>DESIGNS</div>
+</div>
+<div class="pb alt reveal">
+  <div class="c-lbl">YouTube · Khataverse Media</div>
+  <p class="c-txt">High-performance YouTube thumbnails for Khataverse Media's podcast channel — bold typography, high-contrast compositions and sharp visual hierarchy engineered to stop the scroll and drive click-throughs in a competitive feed.</p>
+  <div class="g4">
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Thumbnail 1</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Thumbnail 2</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Thumbnail 3</span></div><div class="bdot">Khataverse</div></div>
+    <div class="ic"><div class="ph2"><div class="ph-ico">+</div><span>Thumbnail 4</span></div><div class="bdot">Khataverse</div></div>
+  </div>
+</div>
+
+<!-- 05 REELS & VIDEO -->
+<div class="sec-hdr dk reveal" id="reels">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">05</div><div class="sec-t">REELS &amp;<br>VIDEO</div>
+</div>
+<div class="vb reveal">
+  <div class="c-lbl">Video Work</div>
+  <div class="pb-title">Reels, Shoots &amp; Edits</div>
+  <p class="c-txt" style="margin-top:6px;">Full-pipeline video production — ideation, shoot direction, and post-production editing. Indoor brand reels, outdoor location shoots, podcast content and product highlight videos for Memory Bank and Khataverse Media.</p>
+  <div class="vgrid">
+    <div class="vc"><div class="vph"><div class="play-c"></div><div class="vlbl">Reel 1 — Add YouTube Embed</div></div></div>
+    <div class="vc"><div class="vph"><div class="play-c"></div><div class="vlbl">Reel 2 — Add YouTube Embed</div></div></div>
+    <div class="vc"><div class="vph"><div class="play-c"></div><div class="vlbl">Reel 3 — Add YouTube Embed</div></div></div>
+  </div>
+</div>
+
+<!-- AI TOOLS SECTION -->
+<div class="sec-hdr lt reveal" id="ai-tools">
+  <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
+  <div class="sec-n">AI</div><div class="sec-t">HOW I USE<br>AI TO WORK<br>SMARTER.</div>
+</div>
+<div class="ai-intro reveal">
+  <div class="ai-intro-label">AI-Powered Workflow</div>
+  <p class="ai-intro-text">I don't just use AI — I've made it part of how I design, create, and deliver faster. From generating ad concepts in seconds to building full brand visuals, these are the AI tools that have changed the way I work every single day.</p>
+</div>
+<div class="ai-tools-grid reveal">
+
+  <!-- Claude -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#1a1a2e;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#CC785C"/>
+          <text x="50" y="68" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="bold" fill="#fff">C</text>
+        </svg>
+      </div>
+      <div class="ai-card-name">Claude</div>
+      <div class="ai-card-by">by Anthropic</div>
+    </div>
+    <p class="ai-card-desc">My go-to AI for thinking through brand strategy, writing compelling captions, brainstorming campaign ideas, and generating creative briefs. Claude helps me go from a blank page to a clear creative direction in minutes.</p>
+    <div class="ai-tag">Strategy · Copywriting · Ideation</div>
+  </div>
+
+  <!-- ChatGPT -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#10a37f;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#10a37f"/>
+          <path d="M50 18 C32 18 20 30 20 46 C20 55 25 63 33 68 L30 82 L45 72 C47 73 48.5 73 50 73 C68 73 80 61 80 46 C80 30 68 18 50 18Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="50" cy="46" r="6" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="ai-card-name">ChatGPT</div>
+      <div class="ai-card-by">by OpenAI</div>
+    </div>
+    <p class="ai-card-desc">I use ChatGPT to quickly draft content calendars, write post captions in different tones, and get feedback on creative directions. It speeds up my content planning process by 3x.</p>
+    <div class="ai-tag">Content · Captions · Planning</div>
+  </div>
+
+  <!-- Veo 3 -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#1a73e8;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#1a73e8"/>
+          <polygon points="35,28 75,50 35,72" fill="#fff"/>
+          <circle cx="72" cy="32" r="10" fill="#EA4335"/>
+          <text x="72" y="36" text-anchor="middle" font-family="Arial Black" font-size="11" font-weight="900" fill="#fff">3</text>
+        </svg>
+      </div>
+      <div class="ai-card-name">Veo 3</div>
+      <div class="ai-card-by">by Google DeepMind</div>
+    </div>
+    <p class="ai-card-desc">Google's AI video generation model — I use it to create concept video clips and ad prototypes for brands without needing a full production crew. Game-changer for quick video mockups and reel concepts.</p>
+    <div class="ai-tag">Video Generation · Ad Concepts</div>
+  </div>
+
+  <!-- Leonardo AI -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#0f0f1a;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#0f0f1a"/>
+          <circle cx="50" cy="50" r="28" fill="none" stroke="#c084fc" stroke-width="3"/>
+          <path d="M50 22 L56 44 L78 50 L56 56 L50 78 L44 56 L22 50 L44 44 Z" fill="#c084fc" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="ai-card-name">Leonardo AI</div>
+      <div class="ai-card-by">Image Generation</div>
+    </div>
+    <p class="ai-card-desc">My favourite tool for generating AI ad creatives, product mockups, and visual concepts. I use Leonardo to produce high-quality images for social media and campaign visuals in a fraction of the time.</p>
+    <div class="ai-tag">AI Ads · Creatives · Mockups</div>
+  </div>
+
+  <!-- Adobe Firefly -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#1c0040;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#1c0040"/>
+          <path d="M50 15 C50 15 68 35 68 55 C68 68 60 78 50 78 C40 78 32 68 32 55 C32 35 50 15 50 15Z" fill="url(#ffgrad)"/>
+          <defs>
+            <linearGradient id="ffgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF6FE8"/>
+              <stop offset="100%" stop-color="#FF4400"/>
+            </linearGradient>
+          </defs>
+          <path d="M50 30 C50 30 60 45 60 55 C60 62 55 67 50 67 C45 67 40 62 40 55 C40 45 50 30 50 30Z" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+      </div>
+      <div class="ai-card-name">Adobe Firefly</div>
+      <div class="ai-card-by">by Adobe</div>
+    </div>
+    <p class="ai-card-desc">Integrated directly into Photoshop, I use Firefly for generative fill, background removal, and expanding images — it's made photo editing workflows dramatically faster for product and brand shoots.</p>
+    <div class="ai-tag">Photo Edit · Generative Fill</div>
+  </div>
+
+  <!-- Ideogram -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#111;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#111"/>
+          <circle cx="50" cy="50" r="26" fill="#fff"/>
+          <text x="50" y="60" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#111">i</text>
+        </svg>
+      </div>
+      <div class="ai-card-name">Ideogram</div>
+      <div class="ai-card-by">AI Image + Text</div>
+    </div>
+    <p class="ai-card-desc">Best-in-class for generating images with accurate text — I use it for creating posters, typography-based visuals, and social creatives where the text inside the image needs to be readable and correct.</p>
+    <div class="ai-tag">Posters · Typography · Social</div>
+  </div>
+
+  <!-- Nano Banana -->
+  <div class="ai-card">
+    <div class="ai-card-top">
+      <div class="ai-logo-wrap" style="background:#1a1200;">
+        <svg viewBox="0 0 100 100" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
+          <rect width="100" height="100" rx="22" fill="#1a1200"/>
+          <path d="M25 65 Q30 35 55 28 Q75 22 78 40 Q82 58 60 65 Q45 70 30 60" fill="none" stroke="#FFD700" stroke-width="7" stroke-linecap="round"/>
+          <circle cx="26" cy="66" r="5" fill="#FFD700"/>
+        </svg>
+      </div>
+      <div class="ai-card-name">Nano Banana</div>
+      <div class="ai-card-by">AI Video Tools</div>
+    </div>
+    <p class="ai-card-desc">I use Nano Banana to accelerate short-form video creation and AI-assisted editing. Perfect for quick turnaround reel content and social video deliverables.</p>
+    <div class="ai-tag">Reels · Video · Short-Form</div>
+  </div>
+
+</div>
+
+<!-- CONNECT -->
 <section class="connect" id="connect">
+  <div class="connect-grunge"></div>
+  <div class="connect-vign"></div>
   <div class="conn-ghost">CONNECT</div>
-  <div class="conn-eye">Available for Work<br>Wadala, Mumbai</div>
-  <a href="mailto:sk.mohdali707@gmail.com" class="conn-btn">GET IN TOUCH ✦</a>
+  <div class="conn-eye">Available for Work · Andheri, Mumbai</div>
+
+  <div class="cctv-wrap">
+    <div class="cctv-figure">
+      <svg class="cctv-wires" viewBox="0 0 24 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;left:-8px;top:0;height:100%;width:24px;overflow:visible;z-index:0;">
+        <path d="M4 0 Q14 50 6 100 Q1 150 10 200 Q16 250 5 300" stroke="rgba(245,239,224,0.12)" stroke-width="1.5" fill="none"/>
+        <path d="M14 0 Q6 70 16 130 Q22 180 8 250 Q3 275 12 300" stroke="rgba(245,239,224,0.07)" stroke-width="1" fill="none"/>
+      </svg>
+      <div class="cctv-cam-only">
+        <div class="cam-bracket"></div>
+        <div class="cam-body">
+          <div class="cam-lens"></div>
+          <div class="cam-detail">
+            <div class="cam-led"></div>
+            <div class="cam-strip"></div>
+            <div class="cam-strip"></div>
+          </div>
+          <div class="cam-beam"></div>
+        </div>
+      </div>
+      <div class="old-tv">
+        <div class="old-tv-screen">
+          <div class="tv-static"></div>
+          <div class="tv-crack"></div>
+        </div>
+      </div>
+    </div>
+    <div class="conn-projection">
+      <div class="conn-thanks">Thanks for Watching</div>
+      <h2 class="conn-h"><span>LET'S</span><br>CONNECT.</h2>
+      <p class="conn-sub">I'll be happy to hangout with your brand.</p>
+      <a href="mailto:sk.mohdali707@gmail.com" class="conn-btn">GET IN TOUCH ✦</a>
+    </div>
+  </div>
 </section>
 
 <div class="footer">
@@ -435,12 +1009,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 </div>
 
 <script>
-const cur=document.getElementById('cur');
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 document.addEventListener('mousemove',e=>{
-  cur.style.left=(e.clientX-12)+'px';cur.style.top=(e.clientY-20)+'px';
+  cur.style.left=(e.clientX-4)+'px';cur.style.top=(e.clientY-11)+'px';
+  ring.style.left=(e.clientX-20)+'px';ring.style.top=(e.clientY-20)+'px';
 });
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const sc=document.getElementById('sparks');
+for(let i=0;i<22;i++){
+  const s=document.createElement('div');s.className='spark';
+  s.style.cssText=`left:${Math.random()*100}%;top:${10+Math.random()*75}%;--d:${3+Math.random()*6}s;animation-delay:${Math.random()*5}s;width:${2+Math.random()*5}px;height:${2+Math.random()*5}px;background:${Math.random()>.5?'#F5C842':'#FF6B1A'}`;
+  sc.appendChild(s);
+}
+const sb=document.getElementById('sigbars');
+for(let i=0;i<14;i++){
+  const b=document.createElement('div');b.className='hsig';
+  b.style.top=(i*(100/14))+'%';
+  sb.appendChild(b);
+}
 </script>
 </body>
 </html>
