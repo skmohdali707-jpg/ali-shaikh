@@ -28,7 +28,7 @@ body{font-family:'Barlow','Segoe UI',Roboto,Helvetica,Arial,sans-serif;backgroun
   background:#1A1A1A;
   border-radius:12px 12px 8px 8px;
   border:2px solid #444;
-  position:fixed;top:0;left:0;pointer-events:none;z-index:9999;
+  position:fixed;top:0;left:0;pointer-events:none;z-index:100005;
   box-shadow:0 2px 12px rgba(0,0,0,0.55), inset 0 2px 0 rgba(255,255,255,0.08);
   will-change:transform;contain:layout style paint;
 }
@@ -51,7 +51,7 @@ body{font-family:'Barlow','Segoe UI',Roboto,Helvetica,Arial,sans-serif;backgroun
 #cur-ring{
   width:40px;height:40px;
   border:2px solid rgba(232,71,10,0.55);
-  border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;
+  border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:100004;
   will-change:transform;contain:layout style paint;transition:transform .1s ease-out;
 }
 
@@ -271,13 +271,46 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
 .vb .c-lbl{color:var(--ylw);}
 .vb .pb-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:24px;letter-spacing:2px;color:#fff;margin-bottom:8px;}
 .vb .c-txt{color:rgba(245,239,224,.75);}
-.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.vc{border-radius:10px;overflow:hidden;background:#111;position:relative;aspect-ratio:9/16;}
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:840px;margin:28px auto 0;width:100%;}
+.vc{border-radius:12px;overflow:hidden;background:#0D0D0D;position:relative;aspect-ratio:9/16;width:100%;max-width:260px;margin:0 auto;border:1px solid rgba(255,255,255,0.08);box-shadow:0 10px 28px rgba(0,0,0,0.6);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;}
+.vc.vc-playable{cursor:pointer;}
+.vc.vc-playable:hover{transform:translateY(-6px);border-color:rgba(232,71,10,0.7);box-shadow:0 18px 42px rgba(232,71,10,0.28);}
 .vc iframe,.vc video{width:100%;height:100%;border:none;display:block;object-fit:cover;}
+.vc.vc-playable video{pointer-events:none;}
+.vc-sound-badge{position:absolute;bottom:12px;right:12px;background:rgba(10,10,10,0.82);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:4px 10px;display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(245,239,224,0.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:2;pointer-events:none;transition:opacity .2s ease;}
+.vc:hover .vc-sound-badge{opacity:0;}
+.vc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.25) 50%,rgba(0,0,0,0.45) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:3;}
+.vc:hover .vc-overlay{opacity:1;}
+.vc-play-btn{width:52px;height:52px;border-radius:50%;background:var(--or);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(232,71,10,0.65);transition:transform .22s ease;}
+.vc:hover .vc-play-btn{transform:scale(1.1);}
+.vc-play-btn svg{fill:#fff;margin-left:3px;}
+.vc-play-hint{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(10,10,10,0.7);padding:5px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(4px);}
 .vph{width:100%;height:100%;background:#1A1200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
 .play-c{width:58px;height:58px;border-radius:50%;border:2px solid rgba(245,239,224,.22);display:flex;align-items:center;justify-content:center;}
 .play-c::after{content:'';border-left:20px solid rgba(245,239,224,.45);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:4px;}
 .vlbl{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,.28);text-align:center;padding:0 16px;}
+
+/* ── FULLSCREEN VIDEO LIGHTBOX MODAL ── */
+.v-modal{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:18px 24px 22px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s ease,visibility .25s ease;}
+.v-modal.active{opacity:1;visibility:visible;pointer-events:auto;}
+.v-modal-backdrop{position:absolute;inset:0;background:rgba(5,5,5,0.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:0;}
+.v-modal-top{position:relative;z-index:2;width:100%;max-width:960px;display:flex;align-items:center;justify-content:space-between;padding:4px 0;}
+.v-modal-info{display:flex;align-items:center;gap:14px;}
+.v-modal-tag{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--or);}
+.v-modal-title{font-family:'Oswald',sans-serif;font-size:15px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;}
+.v-modal-counter{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:rgba(245,239,224,0.45);background:rgba(255,255,255,0.06);padding:4px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);}
+.v-modal-close{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;outline:none;}
+.v-modal-close:hover{background:var(--or);border-color:var(--or);transform:scale(1.1);box-shadow:0 0 20px rgba(232,71,10,0.6);}
+.v-modal-stage{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,40px);width:100%;flex:1;min-height:0;padding:8px 0;}
+.v-modal-nav{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.22);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;flex-shrink:0;outline:none;}
+.v-modal-nav:hover{background:var(--or);border-color:var(--or);transform:scale(1.12);box-shadow:0 0 22px rgba(232,71,10,0.65);}
+.v-modal-box{position:relative;height:min(78vh,640px);aspect-ratio:9/16;max-width:min(88vw,calc(min(78vh,640px)*9/16));background:#000;border-radius:14px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,0.95),0 0 45px rgba(232,71,10,0.28);border:2px solid rgba(232,71,10,0.45);display:flex;align-items:center;justify-content:center;}
+#v-modal-video{width:100%;height:100%;object-fit:contain;background:#000;display:block;}
+.v-modal-bottom{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:4px;}
+.v-modal-dots{display:flex;gap:8px;align-items:center;}
+.v-modal-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.22);cursor:pointer;transition:all .22s ease;}
+.v-modal-dot.active{width:26px;border-radius:5px;background:var(--or);box-shadow:0 0 10px rgba(232,71,10,0.7);}
+.v-modal-hint{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,224,0.35);}
 
 /* CONNECT */
 .connect{background:#0A0A0A;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:80px 40px 120px;}
@@ -364,6 +397,8 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   .about{padding:80px 40px 90px;}
   .about-info-grid{gap:22px;}
   .sec-hdr,.pb,.vb,.toc,.connect{padding-left:40px;padding-right:40px;}
+  .vgrid{max-width:740px;gap:16px;}
+  .vc{max-width:230px;}
 }
 @media(max-width:768px){
   nav{padding:12px 18px;}
@@ -376,7 +411,8 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   .sec-t{font-size:clamp(36px,10vw,56px);}
   .g4{grid-template-columns:repeat(2,1fr);}
   .g3{grid-template-columns:repeat(2,1fr);}
-  .vgrid{grid-template-columns:1fr;}
+  .vgrid{grid-template-columns:1fr;max-width:240px;margin:22px auto 0;gap:22px;}
+  .vc{max-width:240px;aspect-ratio:9/16;}
   .toc-grid{grid-template-columns:repeat(2,1fr);}
   .footer{padding:14px 20px 72px;flex-direction:column;gap:6px;text-align:center;}
   .call-bar{padding:10px 16px;}
@@ -386,6 +422,13 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   .crt-feet{padding:0 40px;}
   .sw-icon{width:44px;height:44px;}
   .pb{padding:32px 20px 40px;}
+  .v-modal{padding:12px 14px 16px;}
+  .v-modal-stage{gap:8px;}
+  .v-modal-nav{width:42px;height:42px;}
+  .v-modal-nav svg{width:22px;height:22px;}
+  .v-modal-box{height:min(72vh,520px);}
+  .v-modal-hint{display:none;}
+  .v-modal-title{font-size:13px;}
 }
 @media(max-width:480px){
   .toc-grid{grid-template-columns:1fr;}
@@ -395,6 +438,8 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   .call-num{font-size:15px;}
   .sw-row-h{gap:8px;}
   .sw-icon{width:40px;height:40px;}
+  .vgrid{max-width:220px;gap:18px;}
+  .vc{max-width:220px;}
 }
 </style>
 </head>
@@ -726,7 +771,7 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
 <section class="toc reveal" id="projects">
   <div class="toc-ttl">Work &amp; Projects</div>
   <div class="toc-grid">
-    <a href="#reels" class="toc-c"><div class="tc-n">01</div><div class="tc-l">Movie Motion Poster</div></a>
+    <a href="#reels" class="toc-c"><div class="tc-n">01</div><div class="tc-l">Video &amp; Motion</div></a>
     <a href="#social-media" class="toc-c"><div class="tc-n">02</div><div class="tc-l">Social Media Creatives</div></a>
     <a href="#thumbnails" class="toc-c"><div class="tc-n">03</div><div class="tc-l">Thumbnail Designs</div></a>
     <a href="#branding" class="toc-c"><div class="tc-n">04</div><div class="tc-l">Branding</div></a>
@@ -735,24 +780,54 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   </div>
 </section>
 
-<!-- 01 MOVIE MOTION POSTER -->
+<!-- 01 VIDEO & MOTION -->
 <div class="sec-hdr dk reveal" id="reels">
   <div class="sec-hdr-grunge"></div><div class="sec-hdr-tex"></div><div class="sec-hdr-vign"></div>
-  <div class="sec-n">01</div><div class="sec-t">MOVIE MOTION<br>POSTER</div>
+  <div class="sec-n">01</div><div class="sec-t">VIDEO &amp;<br>MOTION</div>
 </div>
 <div class="vb reveal">
   <div class="c-lbl">Motion Graphics · Khataverse Media</div>
   <div class="pb-title">Motion Movie Posters — Zee Cinema</div>
   <p class="c-txt" style="margin-top:6px;">Motion movie posters designed and animated for the <strong style="color:rgba(245,239,224,0.75);">Zee Cinema Instagram account</strong> — static key art rebuilt into looping motion pieces with layered parallax, title animation, light and grain treatment. Built in After Effects and delivered broadcast-ready on a recurring schedule.</p>
   <div class="vgrid">
-    <div class="vc">
-      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/1080-1920_1.mp4" autoplay loop muted playsinline controls preload="metadata"></video>
+    <div class="vc vc-playable" data-v-idx="0" title="Click to watch with sound">
+      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/1080-1920_1.mp4" autoplay loop muted playsinline preload="metadata"></video>
+      <div class="vc-sound-badge">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span>Sound</span>
+      </div>
+      <div class="vc-overlay">
+        <div class="vc-play-btn">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff"><polygon points="7 4 19 12 7 20 7 4"></polygon></svg>
+        </div>
+        <span class="vc-play-hint">Watch with Sound ✦</span>
+      </div>
     </div>
-    <div class="vc">
-      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/120.mp4" autoplay loop muted playsinline controls preload="metadata"></video>
+    <div class="vc vc-playable" data-v-idx="1" title="Click to watch with sound">
+      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/120.mp4" autoplay loop muted playsinline preload="metadata"></video>
+      <div class="vc-sound-badge">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span>Sound</span>
+      </div>
+      <div class="vc-overlay">
+        <div class="vc-play-btn">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff"><polygon points="7 4 19 12 7 20 7 4"></polygon></svg>
+        </div>
+        <span class="vc-play-hint">Watch with Sound ✦</span>
+      </div>
     </div>
-    <div class="vc">
-      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/Azaad%20Motion%20Poster.mp4" autoplay loop muted playsinline controls preload="metadata"></video>
+    <div class="vc vc-playable" data-v-idx="2" title="Click to watch with sound">
+      <video src="https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/Azaad%20Motion%20Poster.mp4" autoplay loop muted playsinline preload="metadata"></video>
+      <div class="vc-sound-badge">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <span>Sound</span>
+      </div>
+      <div class="vc-overlay">
+        <div class="vc-play-btn">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff"><polygon points="7 4 19 12 7 20 7 4"></polygon></svg>
+        </div>
+        <span class="vc-play-hint">Watch with Sound ✦</span>
+      </div>
     </div>
   </div>
 </div>
@@ -1058,6 +1133,52 @@ body.hero-off .glitch-bar,body.hero-off .ticker-track{animation-play-state:pause
   <div class="f-y">2026</div>
 </div>
 
+<!-- FULLSCREEN VIDEO LIGHTBOX MODAL -->
+<div id="v-modal" class="v-modal" aria-hidden="true" role="dialog" aria-label="Video Player Modal">
+  <div class="v-modal-backdrop"></div>
+  
+  <div class="v-modal-top">
+    <div class="v-modal-info">
+      <span class="v-modal-tag">Zee Cinema · Motion Poster</span>
+      <span class="v-modal-title" id="v-modal-title">Motion Poster</span>
+      <span class="v-modal-counter" id="v-modal-counter">1 / 3</span>
+    </div>
+    <button class="v-modal-close" id="v-modal-close" title="Close (Esc)" aria-label="Close video player">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="v-modal-stage">
+    <button class="v-modal-nav prev" id="v-modal-prev" title="Previous Video (‹)" aria-label="Previous video">
+      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    
+    <div class="v-modal-box">
+      <video id="v-modal-video" playsinline controls preload="auto"></video>
+    </div>
+
+    <button class="v-modal-nav next" id="v-modal-next" title="Next Video (›)" aria-label="Next video">
+      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+
+  <div class="v-modal-bottom">
+    <div class="v-modal-dots">
+      <span class="v-modal-dot active" data-v-idx="0"></span>
+      <span class="v-modal-dot" data-v-idx="1"></span>
+      <span class="v-modal-dot" data-v-idx="2"></span>
+    </div>
+    <div class="v-modal-hint">Use ‹ › arrow keys or swipe · Esc to close</div>
+  </div>
+</div>
+
 <script>
 const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
 /* cursor: one rAF-batched transform write per frame instead of 4 layout
@@ -1097,6 +1218,125 @@ for(let i=0;i<14;i++){
   fragB.appendChild(b);
 }
 sb.appendChild(fragB);
+
+/* ── FULLSCREEN VIDEO LIGHTBOX LOGIC ── */
+const vModalData = [
+  {
+    src: 'https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/1080-1920_1.mp4',
+    title: 'Zee Cinema — Motion Poster 1'
+  },
+  {
+    src: 'https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/120.mp4',
+    title: '120 Bahadur — Zee Cinema'
+  },
+  {
+    src: 'https://pub-168586ebdca84034b1a5e89919591bf7.r2.dev/Azaad%20Motion%20Poster.mp4',
+    title: 'Azaad Motion Poster — Zee Cinema'
+  }
+];
+
+let curVIdx = 0;
+const vModal = document.getElementById('v-modal');
+const vModalVideo = document.getElementById('v-modal-video');
+const vModalClose = document.getElementById('v-modal-close');
+const vModalPrev = document.getElementById('v-modal-prev');
+const vModalNext = document.getElementById('v-modal-next');
+const vModalCounter = document.getElementById('v-modal-counter');
+const vModalTitle = document.getElementById('v-modal-title');
+const vModalDots = document.querySelectorAll('.v-modal-dot');
+
+function openVModal(idx){
+  curVIdx = idx;
+  vModal.classList.add('active');
+  vModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  loadAndPlayVideo();
+}
+
+function loadAndPlayVideo(){
+  const item = vModalData[curVIdx];
+  if(!item) return;
+  vModalVideo.src = item.src;
+  vModalVideo.muted = false;
+  vModalVideo.volume = 1.0;
+  if(vModalCounter) vModalCounter.textContent = (curVIdx + 1) + ' / ' + vModalData.length;
+  if(vModalTitle) vModalTitle.textContent = item.title;
+  vModalDots.forEach((d, i) => d.classList.toggle('active', i === curVIdx));
+  
+  const playPromise = vModalVideo.play();
+  if(playPromise !== undefined){
+    playPromise.catch(() => {
+      vModalVideo.muted = false;
+      vModalVideo.play().catch(() => {});
+    });
+  }
+}
+
+function closeVModal(){
+  vModal.classList.remove('active');
+  vModal.setAttribute('aria-hidden', 'true');
+  vModalVideo.pause();
+  vModalVideo.removeAttribute('src');
+  vModalVideo.load();
+  document.body.style.overflow = '';
+}
+
+function nextVModal(){
+  curVIdx = (curVIdx + 1) % vModalData.length;
+  loadAndPlayVideo();
+}
+
+function prevVModal(){
+  curVIdx = (curVIdx - 1 + vModalData.length) % vModalData.length;
+  loadAndPlayVideo();
+}
+
+document.querySelectorAll('.vc-playable').forEach(card => {
+  card.addEventListener('click', () => {
+    const idx = parseInt(card.getAttribute('data-v-idx') || '0', 10);
+    openVModal(idx);
+  });
+});
+
+if(vModalClose) vModalClose.addEventListener('click', closeVModal);
+if(vModalPrev) vModalPrev.addEventListener('click', e => { e.stopPropagation(); prevVModal(); });
+if(vModalNext) vModalNext.addEventListener('click', e => { e.stopPropagation(); nextVModal(); });
+
+const vBackdrop = document.querySelector('.v-modal-backdrop');
+if(vBackdrop) vBackdrop.addEventListener('click', closeVModal);
+
+document.addEventListener('keydown', e => {
+  if(!vModal.classList.contains('active')) return;
+  if(e.key === 'Escape'){
+    closeVModal();
+  } else if(e.key === 'ArrowRight'){
+    nextVModal();
+  } else if(e.key === 'ArrowLeft'){
+    prevVModal();
+  }
+});
+
+vModalDots.forEach(dot => {
+  dot.addEventListener('click', e => {
+    e.stopPropagation();
+    const idx = parseInt(dot.getAttribute('data-v-idx') || '0', 10);
+    curVIdx = idx;
+    loadAndPlayVideo();
+  });
+});
+
+let vTouchStartX = 0;
+const vModalBox = document.querySelector('.v-modal-box');
+if(vModalBox){
+  vModalBox.addEventListener('touchstart', e => {
+    vTouchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+  vModalBox.addEventListener('touchend', e => {
+    const diff = vTouchStartX - e.changedTouches[0].screenX;
+    if(diff > 50) nextVModal();
+    else if(diff < -50) prevVModal();
+  }, {passive: true});
+}
 </script>
 </body>
 </html>
